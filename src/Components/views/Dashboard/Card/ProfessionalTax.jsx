@@ -149,10 +149,10 @@ function ProfessionalTax(){
                 </FormControl>
               </Grid>
               <Grid item xs={6}>
-                <h3>Select Category</h3>
+                <h5>Select Category</h5>
               </Grid>
               <Grid item xs={6}>
-                <h3>No of Staff Working</h3>
+                <h5>No of Staff Working</h5>
               </Grid>
               <Grid item xs={6}>
                 <p>Less than 21000</p>
@@ -313,7 +313,7 @@ function ProfessionalTax(){
             </Box>
           </Grid>
           <Grid item xs={12}>
-              <h4>Address for Communication </h4>
+              <h5>Address for Communication </h5>
             </Grid>
             <Grid item xs={12}>
               <Box

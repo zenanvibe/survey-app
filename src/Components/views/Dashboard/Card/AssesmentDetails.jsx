@@ -5,26 +5,17 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import FormLabel from "@mui/material/FormLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
-
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -37,7 +28,15 @@ const MenuProps = {
   },
 };
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+const propownership = [
+  "Private",
+  "Central Government Undertaking",
+  "GCC",
+  "Central Government",
+  "State Government",
+  "State Government Undertaking",
+  "Public",
+];
 const names = [
   "Oliver Hansen",
   "Van Henry",
@@ -51,17 +50,6 @@ const names = [
   "Kelly Snyder",
 ];
 
-
-const propownership = [
-  "Private",
-  "Central Government Undertaking",
-  "GCC",
-  "Central Government",
-  "State Government",
-  " State Government Undertaking",
-  "Public",
-  
-];
 const buildingtype = [
   "Super Structure",
   "Special Building",
@@ -80,25 +68,11 @@ const buildingtype = [
   "Central Government 50%",
   "Flat",
   "Hostel",
-  
 ];
-const propertytype = [
-  "Mixed",
-  "Residential",
-  "Commercial",
-  "Others",
-  "Vacant Land",
-  
-  
-];
-const building_used_as=[
-  "Mixed",
-  "Residential",
-  "Commercial",
-  "Others",
-  "Vacant Land",
-]
 
+const propertytype = ["Mixed", "Residential", "Commercial", "Others", "Vacant Land"];
+
+const building_used_as = ["Mixed", "Residential", "Commercial", "Others", "Vacant Land"];
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -110,6 +84,32 @@ function getStyles(name, personName, theme) {
 
 export default function Name() {
   const theme = useTheme();
+  const [propertyOwnership, setPropertyOwnership] = React.useState('');
+  const [buildingType, setBuildingType] = React.useState('');
+  const [propertyType, setPropertyType] = React.useState('');
+  const [buildingUsedAs, setBuildingUsedAs] = React.useState('');
+  const [status, setStatus] = React.useState('');
+
+  const handlePropertyOwnershipChange = (event) => {
+    setPropertyOwnership(event.target.value);
+  };
+
+  const handleBuildingTypeChange = (event) => {
+    setBuildingType(event.target.value);
+  };
+
+  const handlePropertyTypeChange = (event) => {
+    setPropertyType(event.target.value);
+  };
+
+  const handleBuildingUsedAsChange = (event) => {
+    setBuildingUsedAs(event.target.value);
+  };
+
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value);
+  };
+ 
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -122,130 +122,111 @@ export default function Name() {
     );
   };
 
+
   return (
     <>
-      <Card sx={{ minWidth: 275, marginTop: 8 }}>
-        <CardContent>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
+    <Card sx={{ minWidth: 275, marginTop: 8 }}>
+      <CardContent>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              Assessment Detail
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl sx={{ width: "100%" }}>
+              <InputLabel id="property-ownership-label">Property Ownership</InputLabel>
+              <Select
+                labelId="property-ownership-label"
+                id="property-ownership"
+                value={propertyOwnership}
+                onChange={handlePropertyOwnershipChange}
+                input={<OutlinedInput label="Property Ownership" />}
+                MenuProps={MenuProps}
               >
-                Assessment Detail{" "}
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <FormControl sx={{ width: "100%" }}>
-                <InputLabel id="demo-multiple-name-label">
-                  Property Ownership
-                </InputLabel>
-                <Select
-                  labelId="demo-multiple-name-label"
-                  id="demo-multiple-name"
-                  multiple
-                  value={personName}
-                  onChange={handleChange}
-                  input={<OutlinedInput label="Another Input" />}
-                  MenuProps={MenuProps}
-                >
-                  {propownership.map((name) => (
-                    <MenuItem
-                      key={name}
-                      value={name}
-                      style={getStyles(name, personName, theme)}
-                    >
-                      {name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <FormControl sx={{ width: "100%" }}>
-                <InputLabel id="demo-multiple-name-label">
-                  Building Type
-                </InputLabel>
-                <Select
-                  labelId="demo-multiple-name-label"
-                  id="demo-multiple-name"
-                  multiple
-                  value={personName}
-                  onChange={handleChange}
-                  input={<OutlinedInput label="Another Input" />}
-                  MenuProps={MenuProps}
-                >
-                  {buildingtype.map((name) => (
-                    <MenuItem
-                      key={name}
-                      value={name}
-                      style={getStyles(name, personName, theme)}
-                    >
-                      {name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <FormControl sx={{ width: "100%" }}>
-                <InputLabel id="demo-multiple-name-label">
-                  Property Type
-                </InputLabel>
-                <Select
-                  labelId="demo-multiple-name-label"
-                  id="demo-multiple-name"
-                  multiple
-                  value={personName}
-                  onChange={handleChange}
-                  input={<OutlinedInput label="Another Input" />}
-                  MenuProps={MenuProps}
-                >
-                  {propertytype.map((name) => (
-                    <MenuItem
-                      key={name}
-                      value={name}
-                      style={getStyles(name, personName, theme)}
-                    >
-                      {name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <FormControl component="fieldset" sx={{ width: "100%" }}>
-                <FormLabel component="legend">Status</FormLabel>
-                <RadioGroup
-                  aria-label="status"
-                  name="status"
-                  // value={status}
-                  onChange={handleChange}
-                >
-                  <FormControlLabel
-                    value="active"
-                    control={<Radio />}
-                    label="Active"
-                  />
-                  <FormControlLabel
-                    value="new"
-                    control={<Radio />}
-                    label="New"
-                  />
-                  <FormControlLabel
-                    value="inactive"
-                    control={<Radio />}
-                    label="Inactive"
-                  />
-                  <FormControlLabel
-                    value="completed"
-                    control={<Radio />}
-                    label="Completed"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Grid>
+                {propownership.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl sx={{ width: "100%" }}>
+              <InputLabel id="building-type-label">Building Type</InputLabel>
+              <Select
+                labelId="building-type-label"
+                id="building-type"
+                value={buildingType}
+                onChange={handleBuildingTypeChange}
+                input={<OutlinedInput label="Building Type" />}
+                MenuProps={MenuProps}
+              >
+                {buildingtype.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl sx={{ width: "100%" }}>
+              <InputLabel id="property-type-label">Property Type</InputLabel>
+              <Select
+                labelId="property-type-label"
+                id="property-type"
+                value={propertyType}
+                onChange={handlePropertyTypeChange}
+                input={<OutlinedInput label="Property Type" />}
+                MenuProps={MenuProps}
+              >
+                {propertytype.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl sx={{ width: "100%" }}>
+              <InputLabel id="building-used-as-label">Building Used As</InputLabel>
+              <Select
+                labelId="building-used-as-label"
+                id="building-used-as"
+                value={buildingUsedAs}
+                onChange={handleBuildingUsedAsChange}
+                input={<OutlinedInput label="Building Used As" />}
+                MenuProps={MenuProps}
+              >
+                {building_used_as.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl component="fieldset" sx={{ width: "100%" }}>
+              <FormLabel component="legend">Status</FormLabel>
+              <RadioGroup
+                aria-label="status"
+                name="status"
+                value={status}
+                onChange={handleStatusChange}
+              >
+                <FormControlLabel value="active" control={<Radio />} label="Active" />
+                <FormControlLabel value="new" control={<Radio />} label="New" />
+                <FormControlLabel value="inactive" control={<Radio />} label="Inactive" />
+                <FormControlLabel value="completed" control={<Radio />} label="Completed" />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          
+
             <Grid item xs={12} sm={6} md={4}>
               <FormControl sx={{ width: "100%" }}>
                 <InputLabel id="demo-multiple-name-label">Bill No</InputLabel>

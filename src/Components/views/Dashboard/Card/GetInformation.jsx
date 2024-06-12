@@ -11,14 +11,6 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -31,47 +23,38 @@ const MenuProps = {
 };
 
 const direction = [
-  {
-    value: "south",
-    label: "South",
-  },
-  {
-    value: "north",
-    label: "North",
-  },
+  { value: "south", label: "South" },
+  { value: "north", label: "North" },
+  { value: "east", label: "East" },
+  { value: "west", label: "West" },
+
 ];
 const names = [
-  {
-    value: "sou",
-    label: "Sou",
-  },
-  {
-    value: "nor",
-    label: "Nor",
-  },
+  { value: "sou", label: "Sou" },
+  { value: "nor", label: "Nor" },
 ];
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name.value) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
 
 export default function Dropdown() {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [region, setRegion] = React.useState('');
+  const [zone, setZone] = React.useState('');
+  const [ward, setWard] = React.useState('');
+  const [street, setStreet] = React.useState('');
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      value
-    );
+  const handleRegionChange = (event) => {
+    setRegion(event.target.value);
+  };
+
+  const handleZoneChange = (event) => {
+    setZone(event.target.value);
+  };
+
+  const handleWardChange = (event) => {
+    setWard(event.target.value);
+  };
+
+  const handleStreetChange = (event) => {
+    setStreet(event.target.value);
   };
 
   return (
@@ -79,105 +62,81 @@ export default function Dropdown() {
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={3}>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
               Get Information
             </Typography>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={9}></Grid>
+          <Grid item xs={12}>
             <FormControl sx={{ m: 1, width: "100%" }}>
-              <InputLabel id="demo-multiple-name-label">Region</InputLabel>
+              <InputLabel id="region-select-label">Region</InputLabel>
               <Select
-                labelId="demo-multiple-name-label"
-                id="demo-multiple-name"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                input={<OutlinedInput label="Name" />}
+                labelId="region-select-label"
+                id="region-select"
+                value={region}
+                onChange={handleRegionChange}
+                input={<OutlinedInput label="Region" />}
                 MenuProps={MenuProps}
               >
                 {direction.map((name) => (
-                  <MenuItem
-                    key={name.value}
-                    value={name.value}
-                    style={getStyles(name, personName, theme)}
-                  >
+                  <MenuItem key={name.value} value={name.value}>
                     {name.label}
                   </MenuItem>
                 ))}
-                 
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <FormControl sx={{ m: 1, width: "100%" }}>
-              <InputLabel id="demo-multiple-name-label">Zone</InputLabel>
+              <InputLabel id="zone-select-label">Zone</InputLabel>
               <Select
-                labelId="demo-multiple-name-label"
-                id="demo-multiple-name"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                input={<OutlinedInput label="Another Input" />}
+                labelId="zone-select-label"
+                id="zone-select"
+                value={zone}
+                onChange={handleZoneChange}
+                input={<OutlinedInput label="Zone" />}
                 MenuProps={MenuProps}
               >
                 {names.map((name) => (
-                  <MenuItem
-                    key={name.value}
-                    value={name.value}
-                    style={getStyles(name, personName, theme)}
-                  >
+                  <MenuItem key={name.value} value={name.value}>
                     {name.label}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <FormControl sx={{ m: 1, width: "100%" }}>
-              <InputLabel id="demo-multiple-name-label">Ward</InputLabel>
+              <InputLabel id="ward-select-label">Ward</InputLabel>
               <Select
-                labelId="demo-multiple-name-label"
-                id="demo-multiple-name"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                input={<OutlinedInput label="Another Input" />}
+                labelId="ward-select-label"
+                id="ward-select"
+                value={ward}
+                onChange={handleWardChange}
+                input={<OutlinedInput label="Ward" />}
                 MenuProps={MenuProps}
               >
                 {names.map((name) => (
-                  <MenuItem
-                    key={name.value}
-                    value={name.value}
-                    style={getStyles(name, personName, theme)}
-                  >
+                  <MenuItem key={name.value} value={name.value}>
                     {name.label}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <FormControl sx={{ m: 1, width: "100%" }}>
-              <InputLabel id="demo-simple-select-label">Street</InputLabel>
+              <InputLabel id="street-select-label">Street</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                // input={<OutlinedInput label="Another Input" />}
-                // MenuProps={MenuProps}
+                labelId="street-select-label"
+                id="street-select"
+                value={street}
+                onChange={handleStreetChange}
+                input={<OutlinedInput label="Street" />}
+                MenuProps={MenuProps}
               >
                 {names.map((name) => (
-                  <MenuItem
-                    key={name.value}
-                    value={name.value}
-                    style={getStyles(name, personName, theme)}
-                  >
+                  <MenuItem key={name.value} value={name.value}>
                     {name.label}
                   </MenuItem>
                 ))}

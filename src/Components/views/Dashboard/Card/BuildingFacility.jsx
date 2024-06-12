@@ -78,7 +78,7 @@ function BuildingFacilty() {
             <Grid item xs={9}></Grid>
 
             <Grid item xs={6}>
-            <p>Hoarding </p>
+            <p sx={{ m: 1, width: "100%" }}>Hoarding </p>
             </Grid>
             <Grid item xs={6}>
               <FormControl sx={{ m: 1, width: "100%" }}>
@@ -102,7 +102,7 @@ function BuildingFacilty() {
               </FormControl>
             </Grid>
             <Grid item xs={6}>
-            <p>Mobile Phone Tower </p>
+            <p sx={{ m: 2, width: "100%" }}>Mobile Phone Tower </p>
             </Grid>
             <Grid item xs={6}>
               <FormControl sx={{ m: 1, width: "100%" }}>

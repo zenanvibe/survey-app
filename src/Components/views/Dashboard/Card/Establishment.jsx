@@ -23,43 +23,21 @@ const MenuProps = {
   },
 };
 
-
-
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
+const remarks = [
+  "Shop Closed",
+  "Not willing to share license details",
+  "Used as godown",
+  "Shop not occupied",
 ];
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
 
 function Establishment() {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [remark, setRemark] = React.useState("");
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+  const handleRemarkChange = (event) => {
+    setRemark(event.target.value);
   };
+
   return (
     <>
       <Card sx={{ minWidth: 275, marginTop: 8 }}>
@@ -71,7 +49,7 @@ function Establishment() {
                 color="text.secondary"
                 gutterBottom
               >
-                Establishment{" "}
+                Establishment
               </Typography>
             </Grid>
             <Grid xs={9}></Grid>
@@ -189,22 +167,17 @@ function Establishment() {
             </Grid>
             <Grid item xs={6}>
               <FormControl sx={{ m: 1, width: "100%" }}>
-                <InputLabel id="demo-multiple-name-label">Remarks</InputLabel>
+                <InputLabel id="remarks-label">Remarks</InputLabel>
                 <Select
-                  labelId="demo-multiple-name-label"
-                  id="demo-multiple-name"
-                  multiple
-                  value={personName}
-                  onChange={handleChange}
-                  input={<OutlinedInput label="Another Input" />}
+                  labelId="remarks-label"
+                  id="remarks"
+                  value={remark}
+                  onChange={handleRemarkChange}
+                  input={<OutlinedInput label="Remarks" />}
                   MenuProps={MenuProps}
                 >
-                  {names.map((name) => (
-                    <MenuItem
-                      key={name}
-                      value={name}
-                      style={getStyles(name, personName, theme)}
-                    >
+                  {remarks.map((name) => (
+                    <MenuItem key={name} value={name}>
                       {name}
                     </MenuItem>
                   ))}
@@ -212,7 +185,7 @@ function Establishment() {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <h4>Address for Communication </h4>
+              <Typography variant="p">Address for Communication</Typography>
             </Grid>
             <Grid item xs={12}>
               <Box
@@ -224,7 +197,7 @@ function Establishment() {
                 autoComplete="off"
               >
                 <TextField
-                  id="outlined-basic"
+                  id="address1"
                   label="Address 1"
                   variant="outlined"
                 />
@@ -240,7 +213,7 @@ function Establishment() {
                 autoComplete="off"
               >
                 <TextField
-                  id="outlined-basic"
+                  id="address2"
                   label="Address 2"
                   variant="outlined"
                 />
@@ -255,11 +228,7 @@ function Establishment() {
                 noValidate
                 autoComplete="off"
               >
-                <TextField
-                  id="outlined-basic"
-                  label="Area"
-                  variant="outlined"
-                />
+                <TextField id="area" label="Area" variant="outlined" />
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -271,11 +240,7 @@ function Establishment() {
                 noValidate
                 autoComplete="off"
               >
-                <TextField
-                  id="outlined-basic"
-                  label="Location"
-                  variant="outlined"
-                />
+                <TextField id="location" label="Location" variant="outlined" />
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -287,11 +252,7 @@ function Establishment() {
                 noValidate
                 autoComplete="off"
               >
-                <TextField
-                  id="outlined-basic"
-                  label="City  "
-                  variant="outlined"
-                />
+                <TextField id="city" label="City" variant="outlined" />
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -303,11 +264,7 @@ function Establishment() {
                 noValidate
                 autoComplete="off"
               >
-                <TextField
-                  id="outlined-basic"
-                  label="State"
-                  variant="outlined"
-                />
+                <TextField id="state" label="State" variant="outlined" />
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -319,28 +276,7 @@ function Establishment() {
                 noValidate
                 autoComplete="off"
               >
-                <TextField
-                  id="outlined-basic"
-                  label="Pincode"
-                  variant="outlined"
-                />
-              </Box>
-            </Grid>
-
-            <Grid item xs={6}>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { m: 1, width: "100%" },
-                }}
-                noValidate
-                autoComplete="off"
-              >
-                <TextField
-                  id="outlined-basic"
-                  label="Mobile"
-                  variant="outlined"
-                />
+                <TextField id="pincode" label="Pincode" variant="outlined" />
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -352,11 +288,7 @@ function Establishment() {
                 noValidate
                 autoComplete="off"
               >
-                <TextField
-                  id="outlined-basic"
-                  label="Landline"
-                  variant="outlined"
-                />
+                <TextField id="mobile" label="Mobile" variant="outlined" />
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -368,11 +300,19 @@ function Establishment() {
                 noValidate
                 autoComplete="off"
               >
-                <TextField
-                  id="outlined-basic"
-                  label="E-mail ID"
-                  variant="outlined"
-                />
+                <TextField id="landline" label="Landline" variant="outlined" />
+              </Box>
+            </Grid>
+            <Grid item xs={6}>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "100%" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField id="email" label="E-mail ID" variant="outlined" />
               </Box>
             </Grid>
           </Grid>
@@ -381,4 +321,5 @@ function Establishment() {
     </>
   );
 }
+
 export default Establishment;

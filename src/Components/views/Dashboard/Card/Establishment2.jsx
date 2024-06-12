@@ -197,7 +197,7 @@ function Establishment2() {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <h4>Address for Communication </h4>
+              <h5>Address for Communication </h5>
             </Grid>
             <Grid item xs={12}>
               <Box
